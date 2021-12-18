@@ -7,12 +7,10 @@ defmodule GibberixWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_gibberix_key",
-    signing_salt: "KkeI422j"
+    signing_salt: "kOpGcqOX"
   ]
 
-  socket "/socket", GibberixWeb.UserSocket,
-    websocket: true,
-    longpoll: false
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -22,7 +20,7 @@ defmodule GibberixWeb.Endpoint do
     at: "/",
     from: :gibberix,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(assets fonts images favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
